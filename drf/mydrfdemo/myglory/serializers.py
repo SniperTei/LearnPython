@@ -30,6 +30,27 @@ class GloryHeroSerializer(serializers.Serializer):
         """
         return GloryHero.objects.create(**validated_data)
     
+    # def update(self, instance, validated_data):
+    #     """
+    #     Update and return an existing `Snippet` instance, given the validated data.
+    #     """
+    #     instance.name = validated_data.get('name', instance.name)
+    #     instance.proficiency = validated_data.get('proficiency', instance.proficiency)
+    #     instance.proficiency_level = validated_data.get('proficiency_level', instance.proficiency_level)
+    #     instance.image = validated_data.get('image', instance.image)
+    #     instance.speciality = validated_data.get('speciality', instance.speciality)
+    #     instance.strong_period = validated_data.get('strong_period', instance.strong_period)
+    #     instance.live_ability = validated_data.get('live_ability', instance.live_ability)
+    #     instance.damage_ability = validated_data.get('damage_ability', instance.damage_ability)
+    #     instance.difficulty = validated_data.get('difficulty', instance.difficulty)
+    #     instance.passive_skill = validated_data.get('passive_skill', instance.passive_skill)
+    #     instance.skill_1 = validated_data.get('skill_1', instance.skill_1)
+    #     instance.skill_2 = validated_data.get('skill_2', instance.skill_2)
+    #     instance.skill_3 = validated_data.get('skill_3', instance.skill_3)
+    #     instance.save()
+    #     return instance
+        
+    
     # created_at = serializers.DateTimeField(auto_now_add=True)
     # updated_at = serializers.DateTimeField(auto_now=True)
     class Meta:
