@@ -20,16 +20,30 @@ class GloryHeroList(APIView):
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=200)
     
-    def put(self, request, id):
-        serializer = GloryHeroSerializer(data=request.data)
-        try:
-            serializer.is_valid(raise_exception=True)
-            print(serializer.validated_data)
-            gloryheros = GloryHero.objects.get(id=id).update(**serializer.validated_data)
-            serializer = GloryHeroSerializer(gloryheros)
-            return Response(serializer.data, status=200)
-        except Exception as e:
-            return Response(serializer.errors, status=200)
+    def put(self, request):
+        # serializer = GloryHeroSerializer(data=request.data)
+        # try:
+        #     serializer.is_valid(raise_exception=True)
+        #     print(serializer.validated_data)
+        #     gloryheros = GloryHero.objects.get(id=id).update(**serializer.validated_data)
+        #     print("gloryheros: ", gloryheros)
+            # serializer = GloryHeroSerializer(gloryheros)
+            return Response({"aaa":"123"}, status=200)
+        # except Exception as e:
+        #     return Response(serializer.errors, status=200)
+    
+    # def put(self, request, id):
+    #     print("put id: ", id)
+    #     serializer = GloryHeroSerializer(data=request.data)
+    #     try:
+    #         serializer.is_valid(raise_exception=True)
+    #         print(serializer.validated_data)
+    #         gloryheros = GloryHero.objects.get(id=id).update(**serializer.validated_data)
+    #         print("gloryheros: ", gloryheros)
+    #         # serializer = GloryHeroSerializer(gloryheros)
+    #         return Response(serializer.data, status=200)
+    #     except Exception as e:
+    #         return Response(serializer.errors, status=200)
     
     def delete(self, request, id):
         gloryheros = GloryHero.objects.get(id=id)

@@ -2,7 +2,7 @@ from rest_framework import serializers
 from myglory.models import GloryHero
 
 class GloryHeroSerializer(serializers.Serializer):
-    # id = serializers.IntegerField(read_only=True)
+    id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(max_length=20)
     proficiency = serializers.IntegerField()
     proficiency_level = serializers.CharField(max_length=20)
@@ -55,4 +55,4 @@ class GloryHeroSerializer(serializers.Serializer):
     # updated_at = serializers.DateTimeField(auto_now=True)
     class Meta:
         model = GloryHero
-        fields = ('name', 'proficiency', 'proficiency_level', 'image', 'speciality', 'strong_period', 'live_ability', 'damage_ability', 'difficulty', 'passive_skill', 'skill_1', 'skill_2', 'skill_3')
+        fields = ('id', 'name', 'proficiency', 'proficiency_level', 'image', 'speciality', 'strong_period', 'live_ability', 'damage_ability', 'difficulty', 'passive_skill', 'skill_1', 'skill_2', 'skill_3')

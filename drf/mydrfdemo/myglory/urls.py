@@ -6,4 +6,5 @@ from myglory.views import GloryHeroList
 
 urlpatterns = [
     path('gloryherolist/', GloryHeroList.as_view()),
+    path('gloryherolist/<int:_id>', GloryHeroList.as_view()),
 ]
