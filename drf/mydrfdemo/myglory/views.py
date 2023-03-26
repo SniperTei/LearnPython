@@ -1,44 +1,36 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import ListModelMixin, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
 
 from myglory.models import GloryHero
 from myglory.serializers import GloryHeroSerializer
 
 
-class GloryHeroList(APIView):
+class GloryHeroList(GenericAPIView, ListModelMixin, CreateModelMixin):
+    
+    queryset = GloryHero.objects.all()
+    serializer_class = GloryHeroSerializer
     
     def get(self, request):
-        gloryheros = GloryHero.objects.all()
-        serializer = GloryHeroSerializer(gloryheros, many=True)
-        return Response(serializer.data)
+        return self.list(request) # ListModelMixin提供的方法
 
     def post(self, request):
-        serializer = GloryHeroSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=200)
-        return Response(serializer.errors, status=200)
+        return self.create(request) # CreateModelMixin提供的方法
     
     
-class GloryHeroDetail(APIView):
+class GloryHeroDetail(GenericAPIView, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin):
     
-    def get(self, request, id):
-        gloryheros = GloryHero.objects.get(id=id)
-        serializer = GloryHeroSerializer(gloryheros)
-        return Response(serializer.data)
+    queryset = GloryHero.objects.all()
+    serializer_class = GloryHeroSerializer
     
-    def put(self, request, id):
-        print("put id: ", id)
-        serializer = GloryHeroSerializer(data=request.data)
-        try:
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-            return Response(serializer.data, status=200)
-        except Exception as e:
-            return Response(serializer.errors, status=200)
+    def get(self, request, pk):
+        return self.retrieve(request, pk) # RetrieveModelMixin提供的方法
     
-    def delete(self, request, id):
-        gloryheros = GloryHero.objects.get(id=id)
-        gloryheros.delete()
-        return Response(status=200)
+    def put(self, request, pk):
+        print('put : ', request.data)
+        return self.update(request, pk) # UpdateModelMixin提供的方法
+    
+    def delete(self, request, pk):
+        return self.destroy(request, pk) # DestroyModelMixin提供的方法

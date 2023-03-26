@@ -98,6 +98,4 @@ class GloryHeroDetail(APIView):
         return Response(status=200)
 ```
 
-### save的补充
-
 

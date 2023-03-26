@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from myglory.models import GloryHero
 
-class GloryHeroSerializer(serializers.Serializer):
+
+class GloryHeroSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(max_length=20)
     proficiency = serializers.IntegerField()
@@ -23,19 +24,6 @@ class GloryHeroSerializer(serializers.Serializer):
     skill_2 = serializers.CharField(max_length=100)
     # 3技能
     skill_3 = serializers.CharField(max_length=100)
-    
-    def create(self, validated_data):
-        """
-        Create and return a new `GloryHero` instance, given the validated data.
-        """
-        return GloryHero.objects.create(**validated_data)
-    
-    def update(self, instance, validated_data):
-        """
-        Update and return an existing `GloryHero` instance, given the validated data.
-        """
-        instance.update(**validated_data)
-        return instance
     
     class Meta:
         model = GloryHero
