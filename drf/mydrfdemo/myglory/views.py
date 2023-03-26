@@ -20,20 +20,6 @@ class GloryHeroList(APIView):
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=200)
     
-    def put(self, request):
-        print("request.data :", request.data)
-        serializer = GloryHeroSerializer(data=request.data)
-        try:
-            serializer.is_valid(raise_exception=True)
-            # print(serializer.validated_data)
-            # 获取到要修改的数据
-            gloryHero = GloryHero.objects.get(id=serializer.validated_data['id'])
-            print("gloryHero: ", gloryHero)
-            return Response({"aaa":"123"}, status=200)
-        except Exception as e:
-            print("e: ", e.args)
-            return Response({"error" : "error le"}, status=200)
-    
     
 class GloryHeroDetail(APIView):
     
@@ -47,12 +33,7 @@ class GloryHeroDetail(APIView):
         serializer = GloryHeroSerializer(data=request.data)
         try:
             serializer.is_valid(raise_exception=True)
-            # n = GloryHero.objects.get(id=id).update(**serializer.validated_data)
-            n = GloryHero.objects.filter(id=id).update(**serializer.validated_data)
-            print("n: ", n)
-            gloryhero = GloryHero.objects.get(id=id)
-            # 保存
-            serializer = GloryHeroSerializer(gloryhero)
+            serializer.save()
             return Response(serializer.data, status=200)
         except Exception as e:
             return Response(serializer.errors, status=200)
