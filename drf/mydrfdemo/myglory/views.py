@@ -1,34 +1,34 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import generics
+from rest_framework.viewsets import ModelViewSet
 
 from myglory.models import GloryHero
 from myglory.serializers import GloryHeroSerializer
 
 
-class GloryHeroList(generics.ListCreateAPIView):
+class GloryHeroList(ModelViewSet):
     
     queryset = GloryHero.objects.all()
     serializer_class = GloryHeroSerializer
     
-    def get(self, request):
-        return self.list(request) # ListModelMixin提供的方法
+    def get_all_heros(self, request):
+        return self.list(request)
 
-    def post(self, request):
-        return self.create(request) # CreateModelMixin提供的方法
+    def add_one_hero(self, request):
+        return self.create(request)
     
     
-class GloryHeroDetail(generics.RetrieveUpdateDestroyAPIView):
+class GloryHeroDetail(ModelViewSet):
     
     queryset = GloryHero.objects.all()
     serializer_class = GloryHeroSerializer
     
-    def get(self, request, pk):
-        return self.retrieve(request, pk) # RetrieveModelMixin提供的方法
+    def get_one_hero(self, request, pk):
+        return self.retrieve(request, pk)
     
-    def put(self, request, pk):
-        print('put : ', request.data)
-        return self.update(request, pk) # UpdateModelMixin提供的方法
+    def edit_one_hero(self, request, pk):
+        return self.update(request, pk)
     
-    def delete(self, request, pk):
+    def delete_one_hero(self, request, pk):
         return self.destroy(request, pk) # DestroyModelMixin提供的方法
