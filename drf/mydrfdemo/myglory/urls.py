@@ -1,11 +1,11 @@
 from django.urls import path, include
 from myglory.views import GloryHeroList, GloryHeroDetail
-# from rest_framework import routers
-# from . import views
+from rest_framework.routers import DefaultRouter
+from . import views
 
 
-# routers = routers.DefaultRouter()
-# routers.register('gkinglory', GloryHeroList, GloryHeroDetail)
+router = DefaultRouter()
+router.register('kingglory', GloryHeroList, basename='kingglorybasename')
 
 urlpatterns = [
     path('gloryherolist/', GloryHeroList.as_view({
@@ -19,4 +19,5 @@ urlpatterns = [
     ),
 ]
 
-# urlpatterns += routers.urls
+print("router.urls: ", router.urls)
+urlpatterns += router.urls
