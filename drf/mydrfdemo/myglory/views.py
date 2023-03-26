@@ -1,14 +1,12 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.generics import GenericAPIView
-from rest_framework.mixins import ListModelMixin, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
+from rest_framework import generics
 
 from myglory.models import GloryHero
 from myglory.serializers import GloryHeroSerializer
 
 
-class GloryHeroList(GenericAPIView, ListModelMixin, CreateModelMixin):
+class GloryHeroList(generics.ListCreateAPIView):
     
     queryset = GloryHero.objects.all()
     serializer_class = GloryHeroSerializer
@@ -20,7 +18,7 @@ class GloryHeroList(GenericAPIView, ListModelMixin, CreateModelMixin):
         return self.create(request) # CreateModelMixin提供的方法
     
     
-class GloryHeroDetail(GenericAPIView, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin):
+class GloryHeroDetail(generics.RetrieveUpdateDestroyAPIView):
     
     queryset = GloryHero.objects.all()
     serializer_class = GloryHeroSerializer
