@@ -4,7 +4,7 @@ from django.urls import path, include
 urlpatterns = [
   # path('movies/', MovieListAPIView.as_view(), name='movie-list'),
   # path('movies/<int:pk>/', MovieDetailAPIView.as_view(), name='movie-detail'),
-  path('snipermovie/', include('snipermovie.user_s.urls')),
+  path('snipermovie/', include('snipermovie.movie.urls'))
 ]
 
 # from django.urls import path, include
