@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'snippets',
     'myglory',
     'snipermovie',
-    'user_s'
+    # 'user_s'
 ]
 
 REST_FRAMEWORK = {
