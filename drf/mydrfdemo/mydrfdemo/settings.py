@@ -90,7 +90,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mydrfdemo.wsgi.application'
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
+# AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
 # Database

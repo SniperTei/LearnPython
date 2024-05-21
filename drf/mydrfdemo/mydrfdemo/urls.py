@@ -31,5 +31,5 @@ urlpatterns = [
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # path('', include('myglory.urls'))
     # path('', include(router.urls)), # include()函数允许引用其他URLconfs 这里的路由对应的是mydrfdemo下的myfirstdrf下的views.py
-    path('', include('snipermovie.urls'))
+    # path('', include('snipermovie.urls'))
 ]
