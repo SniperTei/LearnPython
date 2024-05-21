@@ -38,14 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'snipermovie.accounts',
-    'snipermovie.movie',
-    # 'movie',
+    # 'snipermovie.accounts',
+    # 'snipermovie.movie',
     # 'myfirstdrf',
     # 'snippets',
     # 'myglory',
     # 'snipermovie',
-    # 'user_s'
 ]
 
 REST_FRAMEWORK = {
