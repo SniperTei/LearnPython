@@ -29,6 +29,7 @@ router = routers.DefaultRouter()
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
+    path('movie/', include('movie.urls')),
     # path('', include('snippets.urls')),
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # path('', include('myglory.urls'))
