@@ -8,7 +8,7 @@ class Movie(models.Model):
     # 评分
     rating = models.FloatField()
     # 演员们
-    actors = models.CharField(max_length=100)
+    actors = models.CharField(max_length=200)
     # 发布日期
     release_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
