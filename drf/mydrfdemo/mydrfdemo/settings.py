@@ -38,9 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'snippets',
-    'myglory',
-    'snipermovie',
+    'snipermovie.accounts',
+    'snipermovie.movie',
+    # 'movie',
+    # 'myfirstdrf',
+    # 'snippets',
+    # 'myglory',
+    # 'snipermovie',
     # 'user_s'
 ]
 
@@ -87,6 +91,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mydrfdemo.wsgi.application'
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
 # Database

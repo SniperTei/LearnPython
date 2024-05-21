@@ -1,6 +1,6 @@
 # from django.contrib.auth.models import User, Group
-from rest_framework import serializers
-from .models import MyUser
+# from rest_framework import serializers
+# from .models import MyUser
 
 # class UserSerializer(serializers.HyperlinkedModelSerializer):
 #     class Meta:
@@ -13,7 +13,7 @@ from .models import MyUser
 #         model = Group
 #         fields = ['url', 'name']
 
-class MyUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MyUser
-        fields = ['id', 'username', 'email', 'mobile', 'birthday']
+# class MyUserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = MyUser
+#         fields = ['id', 'username', 'email', 'mobile', 'birthday']
