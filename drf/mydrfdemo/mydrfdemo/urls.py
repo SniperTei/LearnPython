@@ -20,8 +20,9 @@ from rest_framework import routers
 from mydrfdemo.myfirstdrf import views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+router.register(r'users', views.MyUserViewSet)
+# router.register(r'users', views.UserViewSet)
+# router.register(r'groups', views.GroupViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -29,6 +30,6 @@ urlpatterns = [
     # path('', include('snippets.urls')),
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # path('', include('myglory.urls'))
-    # path('', include(router.urls)), # include()函数允许引用其他URLconfs 这里的路由对应的是mydrfdemo下的myfirstdrf下的views.py
+    path('', include(router.urls)), # include()函数允许引用其他URLconfs 这里的路由对应的是mydrfdemo下的myfirstdrf下的views.py
     path('', include('snipermovie.urls'))
 ]
