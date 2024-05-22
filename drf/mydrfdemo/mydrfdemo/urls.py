@@ -17,13 +17,11 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 from mydrfdemo.myfirstdrf import views
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-    # TokenVerifyView,
-)
-# import MyTokenObtainPairView, MyTokenRefreshView
-from accounts.views import MyTokenObtainPairView, MyTokenRefreshView
+# from rest_framework_simplejwt.views import (
+#     TokenObtainPairView,
+#     TokenRefreshView,
+#     # TokenVerifyView,
+# )
 
 router = routers.DefaultRouter()
 # router.register(r'users', views.MyUserViewSet)
@@ -34,14 +32,15 @@ router = routers.DefaultRouter()
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # rest_framework_simplejwt自带的得到token
-    path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # 刷新JWT
-    path('api/token/refresh/', MyTokenRefreshView.as_view(), name='token_refresh'),
+    # rest_framework_simplejwt自带的得到token 这个移动到accounts.urls了
+    # path('api/v1/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # 刷新JWT 这个移动到accounts.urls了
+    # path('api/v1/token/refresh/', MyTokenRefreshView.as_view(), name='token_refresh'),
     # 验证token
     # path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-    path('accounts/', include('accounts.urls')),
-    path('movie/', include('movie.urls')),
+    path('api/v1/accounts/', include('accounts.urls')),
+    path('api/v1/movie/', include('movie.urls')),
+    
     # 下面是其他apps的路由， 忽略
     # path('', include('snippets.urls')),
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
