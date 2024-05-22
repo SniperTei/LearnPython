@@ -64,15 +64,14 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.SessionAuthentication',
         # 'rest_framework.authentication.BasicAuthentication',
     ),
-    # 配置认证方式的选项
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'mydrfdemo.authentication.CustomAuthentication',          # 自定义认证
-    #     'rest_framework.authentication.SessionAuthentication',  # session认证
-    #     'rest_framework.authentication.BasicAuthentication',    # 基本认证
-    # ),
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.IsAuthenticated',
-    # )
+    # 自定义异常处理类
+    'EXCEPTION_HANDLER': 'mydrfdemo.utils.exceptions.custom_exception_handler',
+    # 统一响应格式
+    'DEFAULT_RENDERER_CLASSES': (
+        'mydrfdemo.utils.custom_render.CustomJSONRenderer',
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer', # 这个是用来显示django的那套get和post
+    ),
 }
 
 # JWT配置 里面具体配置可以参考文档

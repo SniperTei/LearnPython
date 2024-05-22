@@ -7,6 +7,9 @@ from .serializers import MovieSerializer
 
 
 class MovieView(APIView):
+    """
+    电影视图
+    """
     # permission_classes = [IsAuthenticated]
     def get(self, request):
         # 如果校验没过
@@ -16,12 +19,11 @@ class MovieView(APIView):
         movies = Movie.objects.all()
         # 序列化
         serializer = MovieSerializer(movies, many=True)
-        return Response({
-            "msg": "success",
-            "code": "000000",
-            "data": serializer.data
-        })
-        # return Response(serializer.data)
+        result_data = {
+            'list': serializer.data,
+            'total': len(serializer.data),
+        }
+        return Response(result_data)
     def post(self, request):
         serializer = MovieSerializer(data=request.data)
         if serializer.is_valid():
