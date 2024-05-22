@@ -16,8 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
-# from tutorial.quickstart import views
 from mydrfdemo.myfirstdrf import views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    # TokenVerifyView,
+)
+# import MyTokenObtainPairView, MyTokenRefreshView
+from accounts.views import MyTokenObtainPairView, MyTokenRefreshView
 
 router = routers.DefaultRouter()
 # router.register(r'users', views.MyUserViewSet)
@@ -28,8 +34,15 @@ router = routers.DefaultRouter()
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # rest_framework_simplejwt自带的得到token
+    path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # 刷新JWT
+    path('api/token/refresh/', MyTokenRefreshView.as_view(), name='token_refresh'),
+    # 验证token
+    # path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('accounts/', include('accounts.urls')),
     path('movie/', include('movie.urls')),
+    # 下面是其他apps的路由， 忽略
     # path('', include('snippets.urls')),
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # path('', include('myglory.urls'))
