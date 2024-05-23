@@ -6,19 +6,10 @@ from .models import CustomUser
 import re
 
 class CustomUserSerializer(serializers.ModelSerializer):
-#   username = serializers.CharField(
-#     max_length=150,
-#     min_length=6,
-#     error_messages={
-#       'max_length': '用户名不能超过150个字符',
-#       'min_length': '用户名不能少于6个字符',
-#       'required': '用户名是必填的',
-#       'blank': '用户名不能为空'
-#     }
-#   )
-  class Meta:
-    model = CustomUser
-    fields = ['id', 'username', 'nickname', 'email', 'mobile', 'menu_permissions']
+
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'username', 'nickname', 'email', 'mobile', 'menu_permissions']
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):

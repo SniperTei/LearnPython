@@ -22,7 +22,9 @@ class CustomUserView(APIView):
         #         "example_key": "example_value"
         #     }
         # }
-        return Response(serializer.data)
+        return Response({
+            "list": serializer.data,
+        })
     def post(self, request):
         serializer = CustomUserSerializer(data=request.data)
         if serializer.is_valid():
