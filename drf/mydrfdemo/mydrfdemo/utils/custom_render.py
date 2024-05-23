@@ -37,20 +37,3 @@ class CustomJSONRenderer(JSONRenderer):
     
     # Call the parent class's render method
     return super().render(modified_data, accepted_media_type, renderer_context)
-  
-  # def modify_data(self, data, status_code):
-  #   code = data.get('code', '000000')
-  #   msg = data.get('msg', 'success')
-  #   # data0 = data.get('data', None)
-  #   # 如果code不是000000，data就是None
-  #   if code != '000000':
-  #     data = None
-  #   # Add the code, msg and status_code to the response
-  #   modified_data = {
-  #     'data': data,
-  #     'msg': msg,
-  #     'code': code,
-  #     'status_code': status_code
-  #   }
-    
-  #   return modified_data
