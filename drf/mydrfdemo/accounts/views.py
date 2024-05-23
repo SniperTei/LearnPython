@@ -29,6 +29,22 @@ class CustomUserView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors)
+    
+# class LoginView(APIView):
+#     def post(self, request):
+#         # 获取token
+#         serializer = MyTokenObtainPairSerializer(data=request.data)
+#         token = serializer.get_token()
+#         print("serializer: ", serializer)
+#         if serializer.is_valid():
+#             return Response({
+#                 "token": '1'
+#             })
+#         return Response({
+#             "code": "100001",
+#             "msg": serializer.errors,
+#         })
+
 # token
 class MyTokenObtainPairView(TokenObtainPairView):
     """
@@ -37,13 +53,6 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
     # 如果需要自定义返回的数据，可以重写post方法
     def post(self, request, *args, **kwargs):
-        # 如果用户名为空
-        # if not request.data.get('username'):
-        #     return Response({
-        #         "error_code": "100001",
-        #         "error_msg": "用户名不能为空",
-        #         "result": "用户名不能为空"
-        #     })
         # 调用父类的post方法
         response = super().post(request, *args, **kwargs)
         # 获取token
@@ -51,21 +60,9 @@ class MyTokenObtainPairView(TokenObtainPairView):
         # 获取用户信息
         user = CustomUser.objects.get(username=request.data.get('username'))
         print("user: " , user)
-        if not user:
-            print("用户不存在11")
-            return Response({
-                "error_code": "100001",
-                "error_msg": "fail",
-                "data": "用户不存在"
-            })
         # 返回数据
         return Response({
-            "token": token,
-            "user": {
-                "id": user.id,
-                "username": user.username,
-                "nickname": user.nickname
-            }
+            "token": token
         })
 
 class MyTokenRefreshView(TokenViewBase):
