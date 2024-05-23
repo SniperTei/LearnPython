@@ -1,5 +1,6 @@
 # from rest_framework import viewsets
 from .models import CustomUser
+from django.contrib.auth import get_user_model
 # APIView
 from rest_framework.views import APIView
 from .serializers import CustomUserSerializer, MyTokenObtainPairSerializer
@@ -76,17 +77,80 @@ class MyTokenRefreshView(TokenViewBase):
 # 注册
 class RegisterView(APIView):
     def post(self, request):
-        serializer = CustomUserSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
+        # serializer = CustomUserSerializer(data=request.data)
+        username = request.data.get('username')
+        # 判断用户是否存在
+        user = CustomUser.objects.filter(username=username)
+        # 用户名不能为空
+        if not username:
             return Response({
-                "code": "000000",
-                "message": "success",
-                "data": serializer.data
+                "code": "100001",
+                "msg": "用户名不能为空",
             })
-        return Response({
-            "code": "100001",
-            "message": "fail",
-            "data": serializer.errors
-        })
 
+        # 用户名要大于6位
+        if len(username) < 6:
+            return Response({
+                "code": "100004",
+                "msg": "用户名不能小于6位",
+            })
+
+        if user:
+            return Response({
+                "code": "100002",
+                "msg": "用户已存在",
+            })
+        
+        password = request.data.get('password')
+
+        # 密码不能为空
+        if not password:
+            return Response({
+                "code": "100003",
+                "msg": "密码不能为空",
+            })
+        
+        email = request.data.get('email')
+        if not email:
+            return Response({
+                "code": "100005",
+                "msg": "邮箱不能为空",
+            })
+        user = CustomUser.objects.create_user(
+            username=username, 
+            password=password, 
+            email=email,
+            is_active=True,
+            is_staff=False,
+            is_superuser=False,
+        )
+        user.save()
+        return Response({
+            "username": username,
+        })
+        # 将user反序列化然后存到数据库中
+        # serializer = CustomUserSerializer(instance=user)
+        # if serializer.is_valid():
+        #     # serializer.save()
+        #     return Response({
+        #         "code": "000000",
+        #         "msg": "success",
+        #         "data": serializer.data
+        #     })
+        # return Response({
+        #     "code": "100006",
+        #     "msg": "注册失败",
+        # })
+
+
+class UnRegisterView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        user = CustomUser.objects.filter(username=username)
+        if not user:
+            return Response({
+                "code": "100007",
+                "msg": "用户不存在",
+            })
+        user.delete()
+        return Response({})

@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import CustomUserView, RegisterView
+from .views import CustomUserView, RegisterView, UnRegisterView
 from accounts.views import MyTokenObtainPairView, MyTokenRefreshView
 # from rest_framework import routers
 
@@ -13,6 +13,8 @@ urlpatterns = [
   path('custom-user-list/', CustomUserView.as_view(), name='user-list'),
   # 注册
   path('register/', RegisterView.as_view(), name='register'),
+  # 注销用户
+  path('unregister/', UnRegisterView.as_view(), name='unregister'),
   # 登录
   path('login/', MyTokenObtainPairView.as_view(), name='login'),
   # 刷新JWT

@@ -12,33 +12,45 @@ class CustomJSONRenderer(JSONRenderer):
     #     'code': '000000'
     #   }
     #   return super().render(modified_data, accepted_media_type, renderer_context)
-    # 如果有error_code字段，说明是异常响应 不搞这一步了， 如果有错，让上一层直接给错误code
-    # if data.get('error_code', None) is not None:
-    #   modified_data = {
-    #     'data': data.get('data', None),
-    #     'msg': data.get('error_msg', None),
-    #     'code': data.get('error_code', None)
-    #   }
-    #   return super().render(modified_data, accepted_media_type, renderer_context)
-    # 如果没有error_code字段，说明是正常响应
-    # Modify the data or format the response as needed
-    modified_data = self.modify_data(data, status_code)
+    # 如果data是字典
+    if isinstance(data, dict):
+      code = data.get('code', '000000')
+      msg = data.get('msg', 'success')
+      # data0 = data.get('data', None)
+      # 如果code不是000000，data就是None
+      if code != '000000':
+        data = None
+      # Add the code, msg and status_code to the response
+      modified_data = {
+        'data': data,
+        'msg': msg,
+        'code': code,
+        'status_code': status_code
+      }
+    else:
+      modified_data = {
+        'data': data,
+        'msg': 'success',
+        'code': '000000',
+        'status_code': status_code
+      }
     
     # Call the parent class's render method
     return super().render(modified_data, accepted_media_type, renderer_context)
   
-  def modify_data(self, data, status_code):
-    code = data.get('code', '000000')
-    msg = data.get('msg', 'success')
-    # 如果code不是000000，data就是None
-    if code != '000000':
-      data = None
-    # Add the code, msg and status_code to the response
-    modified_data = {
-      'data': data,
-      'msg': msg,
-      'code': code,
-      'status_code': status_code
-    }
+  # def modify_data(self, data, status_code):
+  #   code = data.get('code', '000000')
+  #   msg = data.get('msg', 'success')
+  #   # data0 = data.get('data', None)
+  #   # 如果code不是000000，data就是None
+  #   if code != '000000':
+  #     data = None
+  #   # Add the code, msg and status_code to the response
+  #   modified_data = {
+  #     'data': data,
+  #     'msg': msg,
+  #     'code': code,
+  #     'status_code': status_code
+  #   }
     
-    return modified_data
+  #   return modified_data
