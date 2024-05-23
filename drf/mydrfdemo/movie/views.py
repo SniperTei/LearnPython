@@ -12,9 +12,11 @@ class MovieView(APIView):
     """
     # permission_classes = [IsAuthenticated]
     def get(self, request):
-        # 如果校验没过
-        # if not request.user.is_authenticated:
-        #     return Response("用户未登录")
+        print('movie request ; ', request)
+        # simplejwt的token校验用户是否有登录
+        print('request.user:', request.user)
+        if request.user.is_anonymous:
+            return Response({'msg': '请先登录'})
         # 获取所有电影
         movies = Movie.objects.all()
         # 序列化
