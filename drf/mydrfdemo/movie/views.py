@@ -16,7 +16,10 @@ class MovieView(APIView):
         # simplejwt的token校验用户是否有登录
         print('request.user:', request.user)
         if request.user.is_anonymous:
-            return Response({'msg': '请先登录'})
+            return Response({
+                'code': '200000',
+                'msg': '请先登录'
+            })
         # 获取所有电影
         movies = Movie.objects.all()
         # 序列化
