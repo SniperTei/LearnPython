@@ -2,7 +2,7 @@ from rest_framework.renderers import JSONRenderer
 
 class CustomJSONRenderer(JSONRenderer):
   def render(self, data, accepted_media_type=None, renderer_context=None):
-    print('data:', data)
+    # print('data:', data)
     status_code = renderer_context['response'].status_code
     # 如果data是数组 最好不要返回数组吧。
     # if isinstance(data, list):

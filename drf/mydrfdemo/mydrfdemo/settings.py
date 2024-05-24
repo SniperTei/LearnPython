@@ -28,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    # 跨域
+    'corsheaders',
     # simplejwt
     'rest_framework_simplejwt',
     'accounts',
@@ -88,6 +89,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 跨域
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'mydrfdemo.urls'
@@ -112,6 +116,21 @@ WSGI_APPLICATION = 'mydrfdemo.wsgi.application'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
+
+# CORS_ALLOW_HEADERS = [
+#     'accept',
+#     'accept-encoding',
+#     'authorization',
+#     'content-type',
+#     'dnt',
+#     'origin',
+#     'user-agent',
+#     'x-csrftoken',
+#     'x-requested-with',
+# ]
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
