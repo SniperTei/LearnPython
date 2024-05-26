@@ -65,7 +65,11 @@ class MyTokenObtainPairView(TokenObtainPairView):
         print("user: " , user)
         # 返回数据
         return Response({
-            "token": token
+            "token": token,
+            "username": user.username,
+            "email": user.email,
+            "id": user.id,
+            "nickname": user.nickname,
         })
 
 class MyTokenRefreshView(TokenViewBase):
