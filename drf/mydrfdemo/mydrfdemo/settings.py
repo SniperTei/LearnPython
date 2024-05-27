@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'accounts',
     'movie',
+    'book',
     # 'snipermovie.accounts',
     # 'snipermovie.movie',
     # 'myfirstdrf',

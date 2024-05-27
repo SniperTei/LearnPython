@@ -40,6 +40,7 @@ urlpatterns = [
     # path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('api/v1/accounts/', include('accounts.urls')),
     path('api/v1/movie/', include('movie.urls')),
+    path('api/v1/book/', include('book.urls')),
     
     # 下面是其他apps的路由， 忽略
     # path('', include('snippets.urls')),
