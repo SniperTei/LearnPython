@@ -8,7 +8,13 @@ from .serializers import BookSerializer
 class BookListView(APIView):
     def get(self, request):
         book_lists = Book.objects.all()
-        return Response(book_lists)
+        # 序列化
+        serializer = BookSerializer(book_lists, many=True)
+        result_data = {
+            'list': serializer.data,
+            'total': len(serializer.data),
+        }
+        return Response(result_data)
 
     def post(self, request):
         book = request.data
